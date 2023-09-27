@@ -15,12 +15,26 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primarySwatch: Colors.pink,
+        hintColor: Colors.amber,
+        canvasColor: const Color.fromRGBO(255, 254, 229, 1),
+        fontFamily: 'Raleway',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        textTheme: ThemeData.light().textTheme.copyWith(
+              bodyLarge: const TextStyle(
+                color: Color.fromRGBO(20, 51, 51, 1),
+              ),
+              bodyMedium: const TextStyle(
+                color: Color.fromRGBO(20, 51, 51, 1),
+              ),
+          titleMedium: const TextStyle(
+           fontSize: 24,
+              fontFamily: 'RobotoCondensed'
+          ),
+            ),
         useMaterial3: true,
       ),
       home: const CategoryScreen(),
     );
   }
 }
-
-
