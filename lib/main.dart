@@ -1,5 +1,5 @@
-import 'package:delicacies/categories_screen.dart';
-import 'package:delicacies/category_meals_screen.dart';
+import 'package:delicacies/screen/categories_screen.dart';
+import 'package:delicacies/screen/category_meals_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -35,9 +35,11 @@ class MyApp extends StatelessWidget {
             ),
         useMaterial3: true,
       ),
-      home: const CategoryScreen(),
+      // home: const CategoryScreen(),
+      initialRoute: '/',
       routes: {
-        'category_meal_screen': (context)=> CategoryMealsScreen()
+        '/': (context) => const CategoryScreen(),
+        CategoryMealsScreen.id: (context)=> const CategoryMealsScreen()
       },
     );
   }
