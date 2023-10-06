@@ -6,13 +6,38 @@ class MealItem extends StatelessWidget {
   final String imageUrl;
   final int duration;
   final Complexity complexity;
+  final Affordability affordability;
 
-  const MealItem(
-      {super.key,
-      required this.title,
-      required this.imageUrl,
-      required this.duration,
-      required this.complexity});
+  String get complexityText {
+    switch (complexity) {
+      case Complexity.simple:
+        return "Simple";
+      case Complexity.challenging:
+        return "Challenging";
+      case Complexity.hard:
+        return "Hard";
+    }
+  }
+
+  String get affordabilityText {
+    switch (affordability) {
+      case Affordability.affordable:
+        return "Affordable";
+      case Affordability.luxurious:
+        return "Luxurious";
+      case Affordability.pricey:
+        return "Pricey";
+    }
+  }
+
+  const MealItem({
+    super.key,
+    required this.title,
+    required this.imageUrl,
+    required this.duration,
+    required this.complexity,
+    required this.affordability,
+  });
 
   void onTap() {}
 
@@ -41,9 +66,65 @@ class MealItem extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
+                Positioned(
+                  bottom: 12,
+                  right: 10,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.black54,
+                        borderRadius: BorderRadius.circular(5)),
+                    width: 210,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                        softWrap: true,
+                        overflow: TextOverflow.fade,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
-
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.watch_later_outlined),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Text("$duration mins")
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(Icons.work),
+                      const SizedBox(
+                        width: 7,
+                      ),
+                      Text(complexityText)
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(Icons.attach_money),
+                      const SizedBox(
+                        width: 7,
+                      ),
+                      Text(affordabilityText)
+                    ],
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
