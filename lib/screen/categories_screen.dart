@@ -9,9 +9,9 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Delicacies"),
-      ),
+      // appBar: AppBar(
+      //   title: const Text("Delicacies"),
+      // ),
       body: Container(
         padding: const EdgeInsets.all(15),
         child: GridView(
