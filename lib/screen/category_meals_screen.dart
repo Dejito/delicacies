@@ -3,31 +3,57 @@ import 'package:flutter/material.dart';
 
 import 'package:delicacies/dummy_data.dart';
 
-class CategoryMealsScreen extends StatelessWidget {
+import '../models/meal.dart';
+import '../widget/main_drawer.dart';
+
+class CategoryMealsScreen extends StatefulWidget {
   static const id = 'categories_meal_screen';
 
   const CategoryMealsScreen({super.key});
 
-  // final String categoryId;
-  // final String categoryTitle;
-  //
-  // const CategoryMealsScreen(
-  //     {super.key, required this.categoryId, required this.categoryTitle});
+  @override
+  State<CategoryMealsScreen> createState() => _CategoryMealsScreenState();
+}
+
+class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
+
+  late String title;
+  late List<Meal> categoryMeals;
+  bool isCalled = false;
+
 
   @override
+  void didChangeDependencies() {
+    if (!isCalled) {
+      final routeArgs =
+      ModalRoute.of(context)?.settings.arguments as Map<String, String>;
+      title = routeArgs['title']!;
+      final categoryId = routeArgs['id'];
+      categoryMeals = dummyMeals
+          .where((meal) => meal.categories.contains(categoryId))
+          .toList();
+    }
+    isCalled = true;
+    super.didChangeDependencies();
+  }
+
+  void removeItem(String id) {
+    setState(() {
+      categoryMeals.removeWhere((element) => element.id == id);
+    });
+  }
+
+  // final String categoryId;
+  @override
   Widget build(BuildContext context) {
-    final routeArgs =
-        ModalRoute.of(context)?.settings.arguments as Map<String, String>;
-    final categoryTitle = routeArgs['title'];
-    final categoryId = routeArgs['id'];
-    final categoryMeals = dummyMeals
-        .where((meal) => meal.categories.contains(categoryId))
-        .toList();
+
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(categoryTitle!),
+        title: Text(title),
       ),
+      // drawer: const MainDrawer(),
+
       body: ListView.builder(
         itemBuilder: (context, i) => MealItem(
           id: categoryMeals[i].id,
@@ -36,6 +62,7 @@ class CategoryMealsScreen extends StatelessWidget {
             duration: categoryMeals[i].duration,
             complexity: categoryMeals[i].complexity,
           affordability: categoryMeals[i].affordability,
+          removeItem: removeItem,
         ),
         // Text(categoryMeals[i].title),
         itemCount: categoryMeals.length,

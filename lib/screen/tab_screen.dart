@@ -1,5 +1,6 @@
 import 'package:delicacies/screen/categories_screen.dart';
 import 'package:delicacies/screen/favorites_screen.dart';
+import 'package:delicacies/widget/main_drawer.dart';
 import 'package:flutter/material.dart';
 
 class TabScreen extends StatefulWidget {
@@ -13,13 +14,8 @@ class _TabScreenState extends State<TabScreen> {
   var selectedPageIndex = 0;
 
   final List<Map<String, dynamic>> _pages = [
-    {
-      'page': const CategoryScreen(),
-      'title': 'Categories'
-    },
-    {'page': const FavoritesScreen(),
-      'title': 'Favorites'
-    },
+    {'page': const CategoryScreen(), 'title': 'Categories'},
+    {'page': const FavoritesScreen(), 'title': 'Favorites'},
   ];
 
   void selectPage(int index) {
@@ -34,6 +30,7 @@ class _TabScreenState extends State<TabScreen> {
       appBar: AppBar(
         title: Text(_pages[selectedPageIndex]['title']),
       ),
+      drawer: const MainDrawer(),
       body: _pages[selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: selectPage,
