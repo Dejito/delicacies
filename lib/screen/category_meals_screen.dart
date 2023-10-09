@@ -2,9 +2,7 @@ import 'package:delicacies/widget/meal_item.dart';
 import 'package:flutter/material.dart';
 
 import 'package:delicacies/dummy_data.dart';
-
 import '../models/meal.dart';
-import '../widget/main_drawer.dart';
 
 class CategoryMealsScreen extends StatefulWidget {
   static const id = 'categories_meal_screen';
